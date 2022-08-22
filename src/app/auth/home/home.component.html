@@ -44,21 +44,21 @@
         <div class="row">
           <div class="col-md-4">
             <div>
-              <app-pie [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos"></app-pie>
+              <app-pie style="display: flex;justify-content: center;margin-left: -25px;" [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos"></app-pie>
               <div style="text-align: center">
                 {{PuntosNivel}} / {{TotalPuntos}} puntos
               </div>
               <div style="color: #af9f9f; font-size: 13px;text-align: center;">Siguiente nivel: <b>{{SiguienteNivelUsuario}}</b></div>
             </div>
           </div>
-          <div class="col-md-4">
-            <app-dona  [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos"></app-dona>
+          <div class="col-md-4" >
+            <app-dona style="display: flex;justify-content: center;margin-left: -25px;" [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos"></app-dona>
             <div style="text-align: center">
               Puntaje promedio
             </div>
           </div>
           <div class="col-md-4">
-            <app-dona [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos" ></app-dona>
+            <app-dona style="display: flex;justify-content: center;margin-left: -25px;" [Puntos]="PuntosNivel" [TotalPuntos]="TotalPuntos" ></app-dona>
             <div style="text-align: center">
               Puntaje máximo
             </div>
@@ -130,7 +130,7 @@
               <h2 class="titulo">Modo Examen</h2>
           </div>
           <p style="text-align: justify">
-            En este modo es donde se simulará todas las condiciones del examen de certificación Microsoft Certified: Azure Data Scientist Associate DP-100, como el tiempo del examen y la cantidad de preguntas. Este modo también suma puntaje reflejado en el nivel de cada usuario.
+            En este modo es donde se simulará todas las condiciones del examen de Certificación Cisco Certified Network Associate – CCNA 200-301, como el tiempo del examen y la cantidad de preguntas. Este modo también suma puntaje reflejado en el nivel de cada usuario.
           </p>
       </div>
       <div class="card-body" style="border-radius: 0px 0px 20px 20px; padding-top: 20px; padding-bottom:0px; ">
@@ -148,14 +148,16 @@
               </div>
               <div class="col-md-6">
                 <div class="subtitulo" >
-                  Puntaje por habilidades:
+                  Puntaje por temas:
                 </div>
                 <div>
                   <app-barras
                     [ResultadoDominio1]="ResultadoDominio1"
                     [ResultadoDominio2]="ResultadoDominio2"
                     [ResultadoDominio3]="ResultadoDominio3"
-                    [ResultadoDominio4]="ResultadoDominio4">
+                    [ResultadoDominio4]="ResultadoDominio4"
+                    [ResultadoDominio5]="ResultadoDominio5"
+                    [ResultadoDominio6]="ResultadoDominio6">
                   </app-barras>
                 </div>
                 <br>
@@ -186,7 +188,7 @@
               <h2 class="titulo">Modo Entrenamiento</h2>
           </div>
           <p style="text-align: justify;">
-            En este modo se presentarán 60 preguntas, como en el examen de certificación. Además luego de responder cada pregunta se te brindará retroalimentación para poder corroborar tus respuestas de forma inmediata.
+            En este modo se presentarán 120 preguntas, como en el examen de certificación. Además luego de responder cada pregunta se te brindará retroalimentación para poder corroborar tus respuestas de forma inmediata.
           </p>
       </div>
       <div class="card-body" style="border-radius: 0px 0px 20px 20px; padding-top: 20px; padding-bottom:0px; ">
@@ -225,12 +227,12 @@
               <h2 class="titulo">Modo Estudio</h2>
           </div>
           <p style="text-align: justify;">
-            En este modo podrás estudiar de forma personalizada cada una de las habilidades que componen el examen de certificación Microsoft Certified: Azure Data Scientist Associate DP-100.
+            En este modo podrás estudiar de forma personalizada cada una de los temas que componen el examen de Certificación Cisco Certified Network Associate – CCNA 200-301.
           </p>
       </div>
       <div class="card-body" style="border-radius: 0px 0px 20px 20px; padding-top: 20px; padding-bottom:0px; ">
           <div>
-            <span class="subtitulo" style="margin-bottom:15px">Habilidades con mejor puntaje:</span><br />
+            <span class="subtitulo" style="margin-bottom:15px">Temas con mejor puntaje:</span><br />
           </div>
             <div *ngIf="ResultadosPorDominio!=undefined">
               <div *ngIf="ResultadosPorDominio.dominio1!=0" class="row" style="margin-bottom: 14px;">
@@ -238,7 +240,7 @@
                     <mat-progress-bar mode="determinate" style="height: 10px;"
                       [value]="ResultadosPorDominio.dominio1">
                     </mat-progress-bar>
-                    <p><b style="color:#786565">Habilidad 1: </b> <span>Administrar los recursos de Azure para el aprendizaje automático</span></p>
+                    <p><b style="color:#786565">Tema 1: </b> <span>Network Fundamentals (Fundamentos de la red)</span></p>
                 </div>
                 <div class="col-1">
                     <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio1}}%</h5>
@@ -249,7 +251,7 @@
                   <mat-progress-bar mode="determinate" style="height: 10px;"
                   [value]="ResultadosPorDominio.dominio2">
                 </mat-progress-bar>
-                    <p><b style="color:#786565">Habilidad 2: </b> <span>Ejecutar experimentos y entrenar modelos</span></p>
+                    <p><b style="color:#786565">Tema 2: </b> <span>Network Access (Acceso a la red)</span></p>
                 </div>
                 <div class="col-1">
                     <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio2}}%</h5>
@@ -260,7 +262,7 @@
                   <mat-progress-bar mode="determinate" style="height: 10px;"
                   [value]="ResultadosPorDominio.dominio3">
                 </mat-progress-bar>
-                    <p><b style="color:#786565">Habilidad 3: </b> <span>Implementar y poner en funcionamiento soluciones de aprendizaje automático</span></p>
+                    <p><b style="color:#786565">Tema 3: </b> <span>IP Connectivity (Conectividad IP)</span></p>
                 </div>
                 <div class="col-1">
                     <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio3}}%</h5>
@@ -271,10 +273,32 @@
                   <mat-progress-bar mode="determinate" style="height: 10px;"
                   [value]="ResultadosPorDominio.dominio4">
                 </mat-progress-bar>
-                    <p><b style="color:#786565">Habilidad 4: </b> <span>Implementar aprendizaje automático responsable</span></p>
+                    <p><b style="color:#786565">Tema 4: </b> <span>IP Services (Servicios de IP)</span></p>
                 </div>
                 <div class="col-1">
                     <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio4}}%</h5>
+                </div>
+              </div>
+              <div *ngIf="ResultadosPorDominio.dominio5!=0" class="row" style="margin-bottom: 14px;">
+                <div class="col-11" style="top:8px;">
+                  <mat-progress-bar mode="determinate" style="height: 10px;"
+                  [value]="ResultadosPorDominio.dominio5">
+                </mat-progress-bar>
+                    <p><b style="color:#786565">Tema 5: </b> <span>Security Fundamentals (Fundamentos de seguridad)</span></p>
+                </div>
+                <div class="col-1">
+                    <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio5}}%</h5>
+                </div>
+              </div>
+              <div *ngIf="ResultadosPorDominio.dominio6!=0" class="row" style="margin-bottom: 14px;">
+                <div class="col-11" style="top:8px;">
+                  <mat-progress-bar mode="determinate" style="height: 10px;"
+                  [value]="ResultadosPorDominio.dominio6">
+                </mat-progress-bar>
+                    <p><b style="color:#786565">Tema 6: </b> <span>Automation and Programmability (Automatización y Programabilidad)</span></p>
+                </div>
+                <div class="col-1">
+                    <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{ResultadosPorDominio.dominio6}}%</h5>
                 </div>
               </div>
 
@@ -285,7 +309,8 @@
               </div>
             </div>
             <div *ngIf="ResultadosPorDominio.dominio1==0 && ResultadosPorDominio.dominio2==0 &&
-              ResultadosPorDominio.dominio3==0 && ResultadosPorDominio.dominio4==0">
+              ResultadosPorDominio.dominio3==0 && ResultadosPorDominio.dominio4==0 &&
+              ResultadosPorDominio.dominio5==0 && ResultadosPorDominio.dominio6==0">
             <div style=" font-size: 15px;margin-top: 10px;">
              No tiene simulaciones realizadas en modo estudio.
             </div>
@@ -299,7 +324,7 @@
   </div>
   <br />
     <!-- Instrucciones del simulador -->
-    <br />
+<!--     <br />
     <div class="card" style="padding:30px;border-radius:20px;">
       <div class="card-body" style="border-radius: 20px 20px 20px 20px; padding-top: 20px; padding-bottom:0px; ">
         <div class="cabeceraCardBody" style=" margin-bottom: 10px;display: flex;margin-bottom: 20px;">
@@ -313,5 +338,5 @@
       </div>
     </div>
   </div>
-  <br>
+  <br> -->
 </div>

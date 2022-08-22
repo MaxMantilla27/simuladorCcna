@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegistroAdsaExamenDetalleDTO } from 'src/app/Models/ExamenDetalleDTO';
-import { RegistroAdsaExamenRespuestaDTO } from 'src/app/Models/ExamenDTO';
+import { RegistroCcnaExamenDetalleDTO } from 'src/app/Models/ExamenDetalleDTO';
+import { RegistroCcnaExamenRespuestaDTO } from 'src/app/Models/ExamenDTO';
 import { ExamenService } from 'src/app/shared/Services/Examen/examen.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ExamenPreguntaComponent implements OnInit {
   ) { }
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'Simulador CCNA',
       urlWeb: '/',
     },
     {
@@ -44,9 +44,9 @@ export class ExamenPreguntaComponent implements OnInit {
   public TiempoSegundoReversa=0;
   public MinutoReversa=0;
   public MinutoMostrarReversa='';
-  public RegistroEnvioRespuesta:RegistroAdsaExamenRespuestaDTO={
+  public RegistroEnvioRespuesta:RegistroCcnaExamenRespuestaDTO={
     id:0,
-    idSimuladorAdsaModo:0,
+    idSimuladorCcnaModo:0,
     nombreExamen:'',
     tiempo:0,
     idAspNetUsers:'',
@@ -58,14 +58,14 @@ export class ExamenPreguntaComponent implements OnInit {
     respuestaDetalle: [],
     idSimuladorTipoRespuesta:0
   }
-  public DetalleRespuestaEnvio:RegistroAdsaExamenDetalleDTO={
+  public DetalleRespuestaEnvio:RegistroCcnaExamenDetalleDTO={
     id:0,
-    idSimuladorAdsaExamen:0,
-    idSimuladorAdsaDominio:0,
-    idSimuladorAdsaTarea:0,
-    idSimuladorAdsaPregunta:0,
+    idSimuladorCcnaExamen:0,
+    idSimuladorCcnaDominio:0,
+    idSimuladorCcnaTarea:0,
+    idSimuladorCcnaPregunta:0,
     ejecutado:false,
-    idSimuladorAdsaPreguntaRespuesta:0,
+    idSimuladorCcnaPreguntaRespuesta:0,
     puntaje:0,
     idAspNetUsers:'',
     usuario:''
@@ -98,8 +98,8 @@ export class ExamenPreguntaComponent implements OnInit {
           this.NombreDominio=this.ListaPreguntas[0].dominioNombre;
           this.ContadorAux=this.CantidadTotalPreguntas-1;
           this.TiempoSegundo=x.tiempo;
-          //El modo examen dura 180 minutos
-          this.TiempoSegundoReversa=10800-x.tiempo;
+          //El modo examen dura 120 minutos
+          this.TiempoSegundoReversa=7200-x.tiempo;
           this.PausarContador=false;
           this.Cronometro(this.TiempoSegundo);
           this.CronometroReversa(this.TiempoSegundoReversa);
@@ -132,7 +132,7 @@ RegresarMenu(i:number){
 EnviarRespuesta(i:number){
   this.RegistroEnvioRespuesta.respuestaDetalle=[],
   this.RegistroEnvioRespuesta.id=this.IdExamen,
-  this.RegistroEnvioRespuesta.idSimuladorAdsaModo=3,
+  this.RegistroEnvioRespuesta.idSimuladorCcnaModo=3,
   this.RegistroEnvioRespuesta.nombreExamen='',
   this.RegistroEnvioRespuesta.tiempo=this.TiempoSegundo,
   this.RegistroEnvioRespuesta.idAspNetUsers='',
@@ -143,12 +143,12 @@ EnviarRespuesta(i:number){
   this.RegistroEnvioRespuesta.idSimuladorTipoRespuesta=this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta,
   this.ListaPreguntas[i].pregunta.respuesta.forEach((x:any)=>{
     if(x.respuestaSelecionada==1){
-      this.DetalleRespuestaEnvio.idSimuladorAdsaPreguntaRespuesta=x.id;
+      this.DetalleRespuestaEnvio.idSimuladorCcnaPreguntaRespuesta=x.id;
       this.DetalleRespuestaEnvio.id=this.ListaPreguntas[i].id;
-      this.DetalleRespuestaEnvio.idSimuladorAdsaExamen=0;
-      this.DetalleRespuestaEnvio.idSimuladorAdsaDominio=0;
-      this.DetalleRespuestaEnvio.idSimuladorAdsaTarea=0;
-      this.DetalleRespuestaEnvio.idSimuladorAdsaPregunta=this.ListaPreguntas[i].idSimuladorAdsaPregunta;
+      this.DetalleRespuestaEnvio.idSimuladorCcnaExamen=0;
+      this.DetalleRespuestaEnvio.idSimuladorCcnaDominio=0;
+      this.DetalleRespuestaEnvio.idSimuladorCcnaTarea=0;
+      this.DetalleRespuestaEnvio.idSimuladorCcnaPregunta=this.ListaPreguntas[i].idSimuladorCcnaPregunta;
       this.DetalleRespuestaEnvio.ejecutado=false;
       this.DetalleRespuestaEnvio.puntaje=0;
       this.DetalleRespuestaEnvio.idAspNetUsers='';
@@ -206,9 +206,7 @@ EnviarRespuesta(i:number){
       }
       else{
         TiempoSegundoReversa=TiempoSegundoReversa-1;
-      console.log(TiempoSegundoReversa)
         this.MinutoReversa = Math.floor(TiempoSegundoReversa / 60);
-        console.log(this.MinutoReversa)
         this.MinutoMostrarReversa = (this.MinutoReversa < 10) ? '0' + this.MinutoReversa : this.MinutoReversa.toString();
 
         setTimeout(()=>{

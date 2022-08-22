@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegistroAdsaExamenDTO } from 'src/app/Models/ExamenDTO';
+import { RegistroCcnaExamenDTO } from 'src/app/Models/ExamenDTO';
 import { DominioService } from 'src/app/shared/Services/Dominio/dominio.service';
 import { ExamenService } from 'src/app/shared/Services/Examen/examen.service';
 
@@ -20,7 +20,7 @@ export class ModoEstudioComponent implements OnInit {
 
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'Simulador CCNA',
       urlWeb: '/',
     },
     {
@@ -28,12 +28,12 @@ export class ModoEstudioComponent implements OnInit {
       urlWeb: '/ModoEstudio',
     },
   ];
-  public RegistrarExamenEnvio:RegistroAdsaExamenDTO={
+  public RegistrarExamenEnvio:RegistroCcnaExamenDTO={
     id:0,
-    idSimuladorAdsaModo:0,
+    idSimuladorCcnaModo:0,
     nombreExamen:'',
     tiempo:0,
-    idSimuladorAdsaDominio:0
+    idSimuladorCcnaDominio:0
   }
   public Dominio:any;
   public IdExamen=0;
@@ -68,10 +68,10 @@ export class ModoEstudioComponent implements OnInit {
     if(this.userForm.valid && this.DominioSeleccionado!=0){
       this.BotonResgistrar=true;
       this.RegistrarExamenEnvio.id=0,
-      this.RegistrarExamenEnvio.idSimuladorAdsaModo=1,
+      this.RegistrarExamenEnvio.idSimuladorCcnaModo=1,
       this.RegistrarExamenEnvio.nombreExamen=this.userForm.get('NombreSimulacion')?.value;
       this.RegistrarExamenEnvio.tiempo=0,
-      this.RegistrarExamenEnvio.idSimuladorAdsaDominio=this.DominioSeleccionado;
+      this.RegistrarExamenEnvio.idSimuladorCcnaDominio=this.DominioSeleccionado;
       this._ExamenService.Registrar(this.RegistrarExamenEnvio).subscribe({
         next:(x)=>{
           this.IdExamen=x.id
@@ -115,10 +115,9 @@ export class ModoEstudioComponent implements OnInit {
   ListaExamenesIncompletos(){
     this._ExamenService.ListaExamenesIncompletos().subscribe({
       next:(x)=>{
-        console.log(x)
         this.SimulacionesIncompletas=x;
         this.SimulacionesIncompletas.forEach((y:any)=>{
-          if(y.idEstadoExamen!=3 && y.idSimuladorAdsaModo==1){
+          if(y.idEstadoExamen!=3 && y.idSimuladorCcnaModo==1){
             this.ContSimulacionesIncompletas=x.length;
           }
         })
@@ -128,10 +127,9 @@ export class ModoEstudioComponent implements OnInit {
   ListaExamenesConcluidos(){
     this._ExamenService.ListaExamenesConcluidos().subscribe({
       next:(x)=>{
-        console.log(x)
         this.SimulacionesCompletadas=x;
         this.SimulacionesCompletadas.forEach((y:any)=>{
-          if(y.idEstadoExamen==3 && y.idSimuladorAdsaModo==1){
+          if(y.idEstadoExamen==3 && y.idSimuladorCcnaModo==1){
             this.ContSimulacionesCompletadas=x.length;
           }
         })
