@@ -45,7 +45,6 @@ export class EstudioRespuestaPreguntaComponent implements OnInit {
     this._ExamenService.ObtenerRespuestaExamenDetallePreguntaPorId(this.IdExamen).subscribe({
       next:(x)=>{
         this.DatosExamen=x;
-        console.log(this.DatosExamen)
         this.ListaPreguntas=x.pregunta
         this.CantidadTotalPreguntas=x.length;
         this.ContadorPreguntaActual=this.ContadorPregunta+1;
