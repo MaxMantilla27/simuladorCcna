@@ -72,6 +72,7 @@ export class ModoEstudioComponent implements OnInit {
       this.RegistrarExamenEnvio.nombreExamen=this.userForm.get('NombreSimulacion')?.value;
       this.RegistrarExamenEnvio.tiempo=0,
       this.RegistrarExamenEnvio.idSimuladorCcnaDominio=this.DominioSeleccionado;
+      console.log(this.RegistrarExamenEnvio)
       this._ExamenService.Registrar(this.RegistrarExamenEnvio).subscribe({
         next:(x)=>{
           this.IdExamen=x.id

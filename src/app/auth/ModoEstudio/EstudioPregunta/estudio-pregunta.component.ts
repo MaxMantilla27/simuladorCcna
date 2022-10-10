@@ -88,6 +88,7 @@ export class EstudioPreguntaComponent implements OnInit {
     this._ExamenService.ObtenerExamenDetallePreguntaPorId(this.IdExamen).subscribe({
       next:(x)=>{
         this.DatosExamen=x;
+        console.log(this.DatosExamen)
         this.ListaPreguntas=x.listaPreguntas;
         if(this.ListaPreguntas.length==0){
           this._router.navigate(['/ModoEstudio/EstudioReporte/'+this.IdExamen]);
